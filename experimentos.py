@@ -1,10 +1,9 @@
-"""Ejecutar sin Pygame: python experimentos.py. Regenera RESULTADOS.md."""
+"""Muestra los resultados de los experimentos en la terminal."""
 import os
 
 # Evita sobrecostos de BLAS para matrices pequeñas.
 os.environ.setdefault("OPENBLAS_NUM_THREADS", "1")
 os.environ.setdefault("OMP_NUM_THREADS", "1")
-from pathlib import Path
 import numpy as np
 from brain import Brain, policy
 
@@ -26,7 +25,6 @@ def main():
         accuracy = np.mean(model.predict(test).argmax(axis=1) == targets)
         row = f"| {hidden} | {epochs} | {lr:g} | {model.loss():.4f} | {accuracy:.1%} |"
         lines.append(row)
-        print(row, flush=True)
         if (hidden, epochs, lr) == (6, 1200, .1):
             baseline = model
     lines += ["", "## Variar hambre con energía 0.4 y aburrimiento 0.3", "",
@@ -41,8 +39,7 @@ def main():
     for x in [[.5, .5, .5], [.51, .5, .49], [.49, .5, .51]]:
         p = baseline.predict(np.array([x]))[0]
         lines.append(f"| {x[0]:g} | {x[1]:g} | {x[2]:g} | {p[0]:.2%} | {p[1]:.2%} | {p[2]:.2%} |")
-    lines += ["", "Interpretación y respuestas: [EXPERIMENTOS.md](EXPERIMENTOS.md).", ""]
-    Path(__file__).with_name("RESULTADOS.md").write_text("\n".join(lines), encoding="utf-8")
+    print("\n".join(lines))
 
 
 if __name__ == "__main__":
