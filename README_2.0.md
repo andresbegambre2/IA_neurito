@@ -28,7 +28,7 @@ Neurito/
 ├── salto_modelo.py         # Red neuronal manual y datos de entrenamiento
 ├── salto_juego.py          # Física y detección de colisiones
 ├── saltar.py               # Juego y visualización del entrenamiento
-├── GUIA_SALTO.md
+├── README_2.0.md
 └── assets/
     └── jugar_1.png        # Reutilizado en el nuevo juego
 ```
